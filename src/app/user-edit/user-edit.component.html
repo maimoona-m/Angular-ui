@@ -1,0 +1,101 @@
+<div class="container">
+    <form #f="ngForm" (ngSubmit)="update(f.value)">
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input 
+            required 
+            minlength="3"
+            type="text" 
+            [(ngModel)]="user.firstName" 
+            #firstName="ngModel" 
+            class="form-control" 
+            id="firstName" 
+            name="firstName">
+            <div 
+                class="alert alert-danger" 
+                *ngIf="firstName.touched && !firstName.valid">
+
+                <div *ngIf="firstName.errors?.required">
+                    Firstname required
+                </div>
+                <div *ngIf="firstName.errors?.minlength">
+                    Minimuum {{firstName.errors?.minlength.requiredLength}} character required
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input 
+            required 
+            type="text" 
+            [(ngModel)]="user.lastName" 
+            #lastName="ngModel" 
+            class="form-control" 
+            id="lastName" 
+            name="lastName">
+            <div 
+                class="alert alert-danger" 
+                *ngIf="lastName.touched && !lastName.valid">
+
+                <div *ngIf="lastName.errors?.required">
+                    Last name required !
+                </div>
+                </div>
+
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input
+            required 
+            minlength="10"
+            pattern="[0-9]{10}$"
+            type="text" 
+            [(ngModel)]="user.phone" 
+            #phone="ngModel" 
+            class="form-control" 
+            id="phone" 
+            name="phone">
+            <div 
+                class="alert alert-danger" 
+                *ngIf="phone.touched && !phone.valid">
+
+                <div *ngIf="phone.errors?.required">
+                    Phone Number is required
+                </div>
+                <div *ngIf="phone.errors?.minlength">
+                    Phone Number should be  {{phone.errors?.minlength.requiredLength}} digit is  required !
+                </div>
+                <div *ngIf="phone.errors?.pattern">
+                    This is not a valid Phone Number!
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+            required 
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            type="email" 
+            [(ngModel)]="user.email" 
+            #email="ngModel" 
+            class="form-control" 
+            id="email" 
+            name="email" 
+            placeholder="name@example.com">
+            <div 
+                class="alert alert-danger" 
+                *ngIf="email.touched && !email.valid">
+
+                <div *ngIf="email.errors?.required">
+                    Email is required !
+                </div>
+                <div *ngIf="email.errors?.pattern">
+                    This is not a valid Email!
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary"  [disabled]="!f.valid">Save</button>
+        
+    </form>
+</div>

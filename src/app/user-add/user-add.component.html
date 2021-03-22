@@ -1,0 +1,159 @@
+<div class="container">
+    <form #f="ngForm" (ngSubmit)="save(f.value)">
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input 
+            required 
+            minlength="3"
+            type="text" 
+            [(ngModel)]="user.firstName" 
+            #firstName="ngModel" 
+            class="form-control" 
+            id="firstName" 
+            name="firstName">
+            <div 
+                class="alert alert-danger" 
+                *ngIf="firstName.touched && !firstName.valid">
+
+                <div *ngIf="firstName.errors?.required">
+                    Firstname required
+                </div>
+                <div *ngIf="firstName.errors?.minlength">
+                    Minimuum {{firstName.errors?.minlength.requiredLength}} character required
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input 
+            required 
+            type="text" 
+            [(ngModel)]="user.lastName" 
+            #lastName="ngModel" 
+            class="form-control" 
+            id="lastName" 
+            name="lastName">
+            <div 
+                class="alert alert-danger" 
+                *ngIf="lastName.touched && !lastName.valid">
+
+                <div *ngIf="lastName.errors?.required">
+                    Last name required !
+                </div>
+                </div>
+
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input
+            required 
+            minlength="10"
+            pattern="[0-9]{10}$"
+            type="text" 
+            [(ngModel)]="user.phone" 
+            #phone="ngModel" 
+            class="form-control" 
+            id="phone" 
+            name="phone">
+            <div 
+                class="alert alert-danger" 
+                *ngIf="phone.touched && !phone.valid">
+
+                <div *ngIf="phone.errors?.required">
+                    Phone Number is required
+                </div>
+                <div *ngIf="phone.errors?.minlength">
+                    Phone Number should be  {{phone.errors?.minlength.requiredLength}} digit is  required !
+                </div>
+                <div *ngIf="phone.errors?.pattern">
+                    This is not a valid Phone Number!
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+            required 
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            type="email" 
+            [(ngModel)]="user.email" 
+            #email="ngModel" 
+            class="form-control" 
+            id="email" 
+            name="email" 
+            placeholder="name@example.com">
+            <div 
+                class="alert alert-danger" 
+                *ngIf="email.touched && !email.valid">
+
+                <div *ngIf="email.errors?.required">
+                    Email is required !
+                </div>
+                <div *ngIf="email.errors?.pattern">
+                    This is not a valid Email!
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary"  [disabled]="!f.valid">Save</button>
+        
+    </form>
+</div>
+
+
+<!-- <div class="container">
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input 
+            type="text" 
+            formControlName="firstName"
+            
+            class="form-control"
+            id="firstName" 
+            name="firstName">
+            <div *ngIf="firstName.touched && firstName.invalid"
+            class="alert alert-danger">
+            <div *ngIf="firstName.errors.required">First name is required</div>
+            <div *ngIf="firstName.errors.minlength">First name is required minimum of {{firstName.errors.minlength.requiredLength}} character</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input 
+              type="text"
+              FormControlName="lastName"
+              class="form-control"
+              id="lastName" 
+              name="lastName">
+              <div *ngIf="lastName.touched && lastName.invalid"
+            class="alert alert-danger">
+            <div *ngIf="lastName.errors.required">First name is required</div>
+            
+        </div>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input 
+              type="text"
+              FormControlName="phone"
+              class="form-control"
+              id="phone" 
+              name="phone">
+              <div *ngIf="phone.touched && phone.invalid"
+            class="alert alert-danger">Phone number is required</div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input 
+            type="email" 
+            FormControlName="email"
+            class="form-control" 
+            id="email" name="email"
+            placeholder="name@example.com">
+            <div *ngIf="email.touched && email.invalid"
+            class="alert alert-danger">Email is required</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div> -->
